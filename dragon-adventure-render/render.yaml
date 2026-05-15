@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: dragon-adventure
+    env: node
+    plan: free
+    buildCommand: npm install && npm run seed
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_PATH
+        value: /opt/render/project/src/data/dragon_adventure.json

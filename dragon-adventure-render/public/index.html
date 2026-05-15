@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dragon Adventure - Thám hiểm Bách khoa Rồng</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="stars"></div>
+  <main id="app">
+    <section class="hero glass">
+      <div>
+        <p class="eyebrow">Realtime Fantasy Web Game</p>
+        <h1>Dragon Adventure</h1>
+        <h2>Thám hiểm · Bách khoa hơn 1000 loài rồng · Solo realtime</h2>
+        <div class="login-row">
+          <input id="playerName" maxlength="24" placeholder="Tên nhà thám hiểm" />
+          <button id="startBtn">Bắt đầu</button>
+        </div>
+      </div>
+      <div class="dragon-stage" id="heroDragon"></div>
+    </section>
+
+    <section class="dashboard hidden" id="dashboard">
+      <nav class="topbar glass">
+        <div>
+          <strong id="nameLabel">Explorer</strong>
+          <span id="statsLabel"></span>
+        </div>
+        <div class="tabs">
+          <button data-tab="adventure" class="active">Thám hiểm</button>
+          <button data-tab="encyclopedia">Bách khoa</button>
+          <button data-tab="rooms">Solo phòng</button>
+        </div>
+      </nav>
+
+      <section id="adventure" class="tab active">
+        <div class="grid two">
+          <article class="glass panel">
+            <h3>Spin Wheel may mắn</h3>
+            <p>50 coin/lượt. Nhận coin, gem, shard, trứng hoặc rồng hiếm.</p>
+            <div class="wheel-wrap">
+              <div id="wheel" class="wheel"><span>🐉</span></div>
+              <button id="spinBtn" class="primary">Quay spin</button>
+            </div>
+            <div id="reward" class="reward"></div>
+          </article>
+          <article class="glass panel">
+            <h3>Ấp trứng realtime</h3>
+            <div id="eggs" class="cards compact"></div>
+          </article>
+        </div>
+        <article class="glass panel">
+          <h3>Đội rồng của bạn</h3>
+          <div id="myDragons" class="cards"></div>
+        </article>
+      </section>
+
+      <section id="encyclopedia" class="tab">
+        <article class="glass panel">
+          <div class="section-head">
+            <div><h3>Bách khoa rồng</h3><p>1200 loài, mỗi loài có màu sắc, dạng thân, cánh, sừng, aura và chỉ số riêng.</p></div>
+            <div class="filters"><input id="searchDragon" placeholder="Tìm tên rồng..." /><select id="tierFilter"><option value="">Tất cả cấp</option><option value="1">Cấp 1 Common</option><option value="2">Cấp 2 Uncommon</option><option value="3">Cấp 3 Rare</option><option value="4">Cấp 4 Epic</option><option value="5">Cấp 5 Legendary</option><option value="6">Cấp 6 Mythic</option><option value="7">Cấp 7 Ancient</option><option value="8">Cấp 8 Cosmic</option></select></div>
+          </div>
+          <div id="speciesGrid" class="cards"></div>
+          <div class="pager"><button id="prevPage">Trước</button><span id="pageInfo"></span><button id="nextPage">Sau</button></div>
+        </article>
+      </section>
+
+      <section id="rooms" class="tab">
+        <div class="grid two">
+          <article class="glass panel">
+            <h3>Tạo phòng solo theo cấp</h3>
+            <div class="form-grid"><input id="minTier" type="number" min="1" max="8" value="1" /><input id="maxTier" type="number" min="1" max="8" value="8" /><button id="createRoom" class="primary">Tạo phòng</button></div>
+            <h3>Vào phòng bằng mã</h3>
+            <div class="form-grid"><input id="joinCode" placeholder="Mã phòng" /><button id="joinRoom">Vào solo</button></div>
+            <div id="roomResult" class="battle-log"></div>
+          </article>
+          <article class="glass panel">
+            <h3>Phòng realtime</h3>
+            <div id="roomList" class="cards compact"></div>
+          </article>
+        </div>
+        <article class="glass panel"><h3>Hoạt động thế giới</h3><div id="activity" class="activity"></div></article>
+      </section>
+    </section>
+  </main>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
